@@ -1,10 +1,9 @@
-export const defaultStyles = {
-
-}
+export const defaultStyles = {};
 
 export const colors = {
-    primary : "",
-    secondary :"",
-    light : "",
-    white : "#ffffff"
-}
+  primary: "",
+  secondary: "",
+  light: "#f2f2f4",
+  white: "#ffffff",
+  dark: "#636363",
+};
