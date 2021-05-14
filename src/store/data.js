@@ -1,0 +1,51 @@
+export const categories = [
+  {
+    id: "#1",
+    name: "Sushi",
+    description: "The Description",
+    goodFor: "Lunch",
+    image: require("../assets/first.jpg"),
+  },
+  {
+    id: "#2",
+    name: "Ramen",
+    description: "The Description",
+    goodFor: "Breakfast",
+    image: require("../assets/second.jpg"),
+  },
+  {
+    id: "#3",
+    name: "Burger",
+    description: "The Description",
+    goodFor: "Wifi",
+    image: require("../assets/first.jpg"),
+  },
+  {
+    id: "#4",
+    name: "Chinese",
+    description: "The Description",
+    goodFor: "Out-Door Sitting",
+    image: require("../assets/second.jpg"),
+  },
+  {
+    id: "#5",
+    name: "Ramen",
+    description: "The Description",
+    goodFor: "Breakfast",
+    image: require("../assets/second.jpg"),
+  },
+  {
+    id: "#6",
+    name: "Burger",
+    description: "The Description",
+    goodFor: "Wifi",
+    image: require("../assets/first.jpg"),
+  },
+  {
+    id: "#7",
+    name: "Chinese",
+    description: "The Description",
+    goodFor: "Out-Door Sitting",
+    image: require("../assets/second.jpg"),
+  },
+];
