@@ -21,7 +21,7 @@ export function DrawerContent(props) {
             icon={({ color, size }) => (
               <FontAwesome5 name="home" color={color} size={size} />
             )}
-            label="Home"
+            label="HOME"
             onPress={() => {}}
           />
           <DrawerItem

@@ -5,7 +5,7 @@ import {
   Text,
   ScrollView,
   Dimensions,
-  Image,
+  ImageBackground,
 } from "react-native";
 import { colors } from "../config/config";
 
@@ -35,8 +35,28 @@ const CusineCarousel = ({ data }) => {
         horizontal
         style={styles.wrap}
       >
-        {images.map((e) => (
-          <Image key={e} resizeMode="stretch" style={styles.wrap} source={e} />
+        {images.map((e, index, images) => (
+          <ImageBackground
+            key={e}
+            resizeMode="stretch"
+            style={styles.wrap}
+            source={e}
+          >
+            <View
+              style={[
+                styles.wrap,
+                {
+                  backgroundColor: colors.overlayColor,
+                  justifyContent: "center",
+                  alignItems: "center",
+                },
+              ]}
+            >
+              <Text style={{ color: colors.light, fontSize: 18 }}>
+                {data[index].name}
+              </Text>
+            </View>
+          </ImageBackground>
         ))}
       </ScrollView>
       <View style={styles.wrapDot}>
@@ -56,7 +76,7 @@ const CusineCarousel = ({ data }) => {
 const styles = StyleSheet.create({
   wrap: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height * 0.3,
+    height: Dimensions.get("window").height * 0.28,
   },
   wrapDot: {
     position: "absolute",
@@ -66,7 +86,7 @@ const styles = StyleSheet.create({
   },
   dot: {
     margin: 3,
-    color: "black",
+    color: colors.dark,
   },
 });
 

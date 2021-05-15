@@ -3,9 +3,10 @@ import { StyleSheet, View, Text, Button, FlatList } from "react-native";
 import CusineItem from "../components/CusineItem";
 
 import { colors } from "../config/config";
-import { categories } from "../store/data";
+import { categories, foods } from "../store/data";
 
 import CusineCarousel from "../components/CusineCarousel";
+import FoodCard from "../components/FoodCard";
 
 const HomeScreen = ({ navigation }) => {
   const [cusines, setCusines] = useState(categories);
@@ -29,16 +30,38 @@ const HomeScreen = ({ navigation }) => {
         <View style={{ backgroundColor: colors.white }}>
           <Text
             style={{
-              marginLeft: 30,
-              fontSize: 20,
+              marginLeft: 20,
+              fontSize: 16,
               fontWeight: "600",
-              marginBottom: 10,
-              marginTop: 30,
+              marginBottom: 8,
+              marginTop: 16,
             }}
           >
             Cusines
           </Text>
           <CusineCarousel data={categories} />
+        </View>
+        <View>
+          <Text
+            style={{
+              marginHorizontal: 10,
+              marginVertical: 16,
+              fontSize: 16,
+              fontWeight: "600",
+              color: colors.dark,
+            }}
+          >
+            Most Popular
+          </Text>
+          <FlatList
+            data={foods}
+            renderItem={({ item }) => (
+              <FoodCard food={item} navigation={navigation} />
+            )}
+            keyExtractor={(food) => food.id}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+          />
         </View>
       </View>
     </View>

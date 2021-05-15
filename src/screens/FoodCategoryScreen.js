@@ -6,7 +6,9 @@ import {
   ScrollView,
   Dimensions,
   Image,
+  ImageBackground,
 } from "react-native";
+import { colors } from "../config/config";
 
 import { categories } from "../store/data";
 
@@ -37,7 +39,22 @@ const FoodCategoryScreen = () => {
         style={styles.wrap}
       >
         {images.map((e) => (
-          <Image key={e} resizeMode="stretch" style={styles.wrap} source={e} />
+          <ImageBackground
+            key={e}
+            resizeMode="stretch"
+            style={styles.wrap}
+            source={e}
+          >
+            <View
+              style={{
+                backgroundColor: "#000000a0",
+                width: Dimensions.get("window").width,
+                height: Dimensions.get("window").height * 0.25,
+              }}
+            >
+              <Text>Sushi</Text>
+            </View>
+          </ImageBackground>
         ))}
       </ScrollView>
       <View style={styles.wrapDot}>
@@ -67,7 +84,7 @@ const styles = StyleSheet.create({
   },
   dot: {
     margin: 3,
-    color: "black",
+    color: colors.light,
   },
 });
 

@@ -32,14 +32,14 @@ const styles = StyleSheet.create({
     borderColor: colors.white,
   },
   image: {
-    width: 74,
-    height: 74,
+    width: 50,
+    height: 50,
     borderRadius: 50,
     overflow: "hidden",
   },
   textStyle: {
     textAlign: "center",
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "600",
     marginTop: 5,
   },

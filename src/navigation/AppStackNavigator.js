@@ -8,6 +8,7 @@ import AboutScreen from "../screens/AboutScreen";
 import CartScreen from "../screens/CartScreen";
 import RestuarantsMapScreen from "../screens/RestuarantsMapScreen";
 import FoodsInACategoryScreen from "../screens/FoodCategoryScreen";
+import SameFoodListScreen from "../screens/SameFoodListScreen";
 
 const Stack = createStackNavigator();
 
@@ -79,6 +80,13 @@ const AppStackNavigator = ({ navigation }) => {
       <Stack.Screen name="Map" component={RestuarantsMapScreen} />
       <Stack.Screen name="FoodList" component={FoodsInACategoryScreen} />
       <Stack.Screen name="About" component={AboutScreen} />
+      <Stack.Screen
+        name="SameFoodList"
+        component={SameFoodListScreen}
+        options={{
+          title: "Same Food List",
+        }}
+      />
     </Stack.Navigator>
   );
 };
