@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, Text, Button, FlatList } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  FlatList,
+  ScrollView,
+} from "react-native";
 import CusineItem from "../components/CusineItem";
 
 import { colors } from "../config/config";
@@ -11,7 +18,7 @@ import FoodCard from "../components/FoodCard";
 const HomeScreen = ({ navigation }) => {
   const [cusines, setCusines] = useState(categories);
   return (
-    <View
+    <ScrollView
       style={{
         flex: 1,
         backgroundColor: colors.light,
@@ -39,7 +46,7 @@ const HomeScreen = ({ navigation }) => {
           >
             Cusines
           </Text>
-          <CusineCarousel data={categories} />
+          <CusineCarousel data={categories} navigation={navigation} />
         </View>
         <View>
           <Text
@@ -56,7 +63,7 @@ const HomeScreen = ({ navigation }) => {
           <FlatList
             data={foods}
             renderItem={({ item }) => (
-              <FoodCard food={item} navigation={navigation} />
+              <FoodCard key={item.id} food={item} navigation={navigation} />
             )}
             keyExtractor={(food) => food.id}
             showsHorizontalScrollIndicator={false}
@@ -64,7 +71,7 @@ const HomeScreen = ({ navigation }) => {
           />
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 export default HomeScreen;

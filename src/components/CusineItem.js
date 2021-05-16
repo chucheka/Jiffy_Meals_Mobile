@@ -7,7 +7,11 @@ const CusineItem = ({ item, navigation }) => {
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.image}
-        onPress={() => navigation.navigate("FoodList")}
+        onPress={() => {
+          navigation.navigate("SameFoodList", {
+            category: item?.name,
+          });
+        }}
       >
         <Image
           source={item.image}
@@ -24,8 +28,7 @@ const CusineItem = ({ item, navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    // height: 100,
-    width: "100%",
+    height: 100,
     paddingHorizontal: 14,
     paddingVertical: 10,
     backgroundColor: colors.white,
@@ -36,6 +39,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 50,
     overflow: "hidden",
+    backgroundColor: "red",
   },
   textStyle: {
     textAlign: "center",

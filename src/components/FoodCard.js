@@ -8,7 +8,7 @@ const FoodCard = ({ food, navigation }) => {
       style={styles.container}
       onPress={() => {
         navigation.navigate("SameFoodList", {
-          food,
+          category: food?.category,
         });
       }}
     >
@@ -29,22 +29,23 @@ const FoodCard = ({ food, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 10,
-    marginVertical: 10,
+    marginVertical: 6,
     padding: 8,
     backgroundColor: colors.white,
     borderRadius: 5,
+    elevation: 6,
   },
   details: {},
   image: {
     width: "100%",
-    height: 120,
+    height: 200,
     resizeMode: "stretch",
     borderRadius: 5,
   },
   goodFor: {
     flexDirection: "row",
     marginBottom: 10,
-    flexWrap: "no-wrap",
+    flexWrap: "nowrap",
     overflow: "hidden",
   },
   leadingText: {

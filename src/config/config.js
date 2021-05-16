@@ -7,4 +7,5 @@ export const colors = {
   white: "#ffffff",
   dark: "#636363",
   overlayColor: "#000000ab",
+  btnColor: "#5ea23a",
 };

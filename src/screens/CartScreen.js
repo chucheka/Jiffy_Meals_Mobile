@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-function CartScreen(props) {
+function CartScreen({ route }) {
+  console.log(route.params?.order);
   return (
     <View>
       <Text>Cart Screen</Text>
