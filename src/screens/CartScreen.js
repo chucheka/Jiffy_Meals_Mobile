@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { View, Text } from "react-native";
+import { getData } from "../store/storeInAsyncStorage";
+
+import { Context } from "../store/CartContext";
 
 function CartScreen({ route }) {
-  console.log(route.params?.order);
+  const { state } = useContext(Context);
+  console.log(state);
+
   return (
     <View>
       <Text>Cart Screen</Text>

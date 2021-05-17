@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import AppButton from "../components/AppButton";
 
 import AppImage from "../components/AppImage";
 import { colors } from "../config/config";
+import { storeData } from "../store/storeInAsyncStorage";
+
+import { Context } from "../store/CartContext";
 
 function AddFoodToCartScreen({ navigation, route }) {
+  const { storeInCart } = useContext(Context);
+
   const { food } = route.params;
 
   const [quantity, setQuantity] = useState(1);
@@ -52,9 +57,13 @@ function AddFoodToCartScreen({ navigation, route }) {
     }
   }
   function addToCart(order, navigation) {
-    navigation.navigate("Cart", {
-      order,
+    storeData("@User_Cart", {
+      id: Math.random().toString(36).substr(1, 5),
+      item: order,
+      exp_at: Date.now().toString(),
     });
+
+    navigation.navigate("Cart");
   }
 
   return (
@@ -95,7 +104,10 @@ function AddFoodToCartScreen({ navigation, route }) {
           <Text style={styles.signText}>-</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.count}>{quantity}</TouchableOpacity>
-        <TouchableOpacity style={styles.plus} onPress={addQuantity}>
+        <TouchableOpacity
+          style={styles.plus}
+          onPress={() => storeInCart(order)}
+        >
           <Text style={styles.signText}>+</Text>
         </TouchableOpacity>
       </View>
