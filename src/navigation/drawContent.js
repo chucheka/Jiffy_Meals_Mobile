@@ -5,6 +5,7 @@ import { Avatar, Title, Caption, Drawer } from "react-native-paper";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 export function DrawerContent(props) {
+  const { navigation } = props;
   return (
     <DrawerContentScrollView
       {...props}
@@ -43,7 +44,9 @@ export function DrawerContent(props) {
               <FontAwesome5 name="shopping-cart" color={color} size={size} />
             )}
             label="CART"
-            onPress={() => {}}
+            onPress={({}) => {
+              navigation.navigate("Your Cart");
+            }}
           />
           <DrawerItem
             icon={({ color, size }) => (

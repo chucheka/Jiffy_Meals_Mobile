@@ -1,43 +1,33 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import AppButton from "../components/AppButton";
 
 import AppImage from "../components/AppImage";
 import { colors } from "../config/config";
-import { storeData } from "../store/storeInAsyncStorage";
-
-import { Context } from "../store/CartContext";
+import { storeData, getData } from "../store/storeInAsyncStorage";
 
 function AddFoodToCartScreen({ navigation, route }) {
-  const { storeInCart } = useContext(Context);
-
   const { food } = route.params;
 
   const [quantity, setQuantity] = useState(1);
   const [totalCost, setTotalCost] = useState(food?.price);
 
-  const orderId = "djdjjd";
+  const [cart, setCart] = useState([]);
 
   const [order, setOrder] = useState({
-    orderId,
-    item: {
-      name: food?.name,
-      quantity: 1,
-      price: food?.price,
-      restuarant: food?.restuarant,
-    },
+    name: food?.name,
+    quantity: 1,
+    price: food?.price,
+    restuarant: food?.restuarant,
   });
   function addQuantity() {
     setQuantity(quantity + 1);
     setTotalCost(totalCost + food?.price);
     setOrder({
-      orderId,
-      item: {
-        name: food?.name,
-        quantity,
-        price: totalCost,
-        restuarant: food?.restuarant,
-      },
+      name: food?.name,
+      quantity,
+      price: totalCost,
+      restuarant: food?.restuarant,
     });
   }
 
@@ -46,25 +36,43 @@ function AddFoodToCartScreen({ navigation, route }) {
       setQuantity(quantity - 1);
       setTotalCost(totalCost - food?.price);
       setOrder({
-        orderId,
-        item: {
-          name: food?.name,
-          quantity,
-          price: totalCost,
-          restuarant: food?.restuarant,
-        },
+        name: food?.name,
+        quantity,
+        price: totalCost,
+        restuarant: food?.restuarant,
       });
     }
   }
-  function addToCart(order, navigation) {
-    storeData("@User_Cart", {
-      id: Math.random().toString(36).substr(1, 5),
-      item: order,
-      exp_at: Date.now().toString(),
-    });
+  const addToCart = async (order, navigation) => {
+    if (cart) {
+      await storeData("@User_Cart", [
+        ...cart,
+        {
+          id: Math.random().toString(36).substr(1, 5),
+          order,
+          exp_at: Date.now(),
+        },
+      ]);
+    } else {
+      await storeData("@User_Cart", [
+        {
+          id: Math.random().toString(36).substr(1, 5),
+          order,
+          exp_at: Date.now(),
+        },
+      ]);
+    }
 
-    navigation.navigate("Cart");
-  }
+    navigation.navigate("Your Cart");
+  };
+
+  useEffect(() => {
+    async function getCartFromStore() {
+      const result = await getData("@User_Cart");
+      setCart(result);
+    }
+    getCartFromStore();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -104,10 +112,7 @@ function AddFoodToCartScreen({ navigation, route }) {
           <Text style={styles.signText}>-</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.count}>{quantity}</TouchableOpacity>
-        <TouchableOpacity
-          style={styles.plus}
-          onPress={() => storeInCart(order)}
-        >
+        <TouchableOpacity style={styles.plus} onPress={addQuantity}>
           <Text style={styles.signText}>+</Text>
         </TouchableOpacity>
       </View>
@@ -126,13 +131,10 @@ function AddFoodToCartScreen({ navigation, route }) {
           onPressFunc={() =>
             addToCart(
               {
-                orderId,
-                item: {
-                  name: food?.name,
-                  quantity,
-                  price: totalCost,
-                  restuarant: food?.restuarant,
-                },
+                name: food?.name,
+                quantity,
+                price: totalCost,
+                restuarant: food?.restuarant,
               },
               navigation
             )
