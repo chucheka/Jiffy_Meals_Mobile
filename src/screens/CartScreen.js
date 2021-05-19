@@ -24,7 +24,6 @@ function CartScreen({ navigation }) {
       .map((item) => item?.order?.price)
       .reduce((sum, current) => sum + current, 0);
   }
-
   return (
     <>
       {!cart ? (

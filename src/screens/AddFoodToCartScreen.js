@@ -105,13 +105,13 @@ function AddFoodToCartScreen({ navigation, route }) {
           fontWeight: "600",
         }}
       >
-        {food.ingredients.join(",")}
+        <Text>{food.ingredients.join(",")}</Text>
       </View>
       <View style={styles.counter}>
         <TouchableOpacity style={styles.minus} onPress={subtractQuantity}>
           <Text style={styles.signText}>-</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.count}>{quantity}</TouchableOpacity>
+        <Text style={styles.count}>{quantity}</Text>
         <TouchableOpacity style={styles.plus} onPress={addQuantity}>
           <Text style={styles.signText}>+</Text>
         </TouchableOpacity>
@@ -182,6 +182,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 20,
     elevation: 10,
+    backgroundColor: colors.white,
   },
   count: {
     flex: 2,

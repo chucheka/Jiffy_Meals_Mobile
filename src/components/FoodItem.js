@@ -12,10 +12,10 @@ const FoodItem = ({ navigation, food }) => {
         });
       }}
     >
-      <View style={styles.details}>
+      <View>
         <Text style={styles.leadingText}>{food?.name}</Text>
-        <Text>{food.ingredients.join(", ")}</Text>"
-        <Text style={styles.price}>${food?.price}</Text>"
+        <Text>{food.ingredients.join(", ")}</Text>
+        <Text style={styles.price}>${food?.price}</Text>
       </View>
       <Image source={food?.image} style={styles.image} />
     </TouchableOpacity>
@@ -36,12 +36,12 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   leadingText: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: "600",
     color: colors.dark,
   },
   price: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: "600",
   },
 });
