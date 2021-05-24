@@ -107,9 +107,9 @@ const styles = StyleSheet.create({
   },
   btn: {
     position: "absolute",
-    bottom: 0,
+    bottom: 2,
     width: "100%",
-    height: 40,
+    height: 46,
     backgroundColor: colors.btnColor,
     flexDirection: "row",
     justifyContent: "center",

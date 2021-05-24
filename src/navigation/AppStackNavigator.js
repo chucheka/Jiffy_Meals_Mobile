@@ -14,7 +14,8 @@ import CheckoutScreen from "../screens/CheckoutScreen";
 
 const Stack = createStackNavigator();
 
-const AppStackNavigator = ({ navigation }) => {
+const AppStackNavigator = (props) => {
+  const { navigation } = props;
   return (
     <Stack.Navigator
       screenOptions={{
@@ -69,7 +70,7 @@ const AppStackNavigator = ({ navigation }) => {
               <TouchableOpacity
                 {...props}
                 onPress={() => {
-                  navigation.navigate("Cart");
+                  navigation.navigate("Your Cart");
                 }}
               >
                 <FontAwesome5 name="shopping-cart" size={20} color="#636363" />
