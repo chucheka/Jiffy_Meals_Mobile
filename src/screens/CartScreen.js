@@ -84,6 +84,7 @@ function CartScreen({ navigation }) {
               modalVisible={modalVisible}
               setModalVisible={setModalVisible}
               updatedItem={updatedItem}
+              cart={cart}
             />
           ) : (
             <AppButton

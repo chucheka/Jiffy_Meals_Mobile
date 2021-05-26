@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { colors } from "../config/config";
 
 export default function Counter({ addFunc, subtractFunc, count }) {
-  console.log(count);
   return (
     <View style={styles.counter}>
       <TouchableOpacity
@@ -22,14 +21,12 @@ export default function Counter({ addFunc, subtractFunc, count }) {
 
 const styles = StyleSheet.create({
   counter: {
-    marginTop: 10,
-    marginButtom: 20,
     paddingHorizontal: 8,
     alignSelf: "center",
     flexDirection: "row",
     alignItems: "center",
     width: 94,
-    height: 30,
+    height: 34,
     borderColor: colors.dark,
     borderWidth: 1,
     borderRadius: 20,

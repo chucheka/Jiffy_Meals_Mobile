@@ -5,11 +5,13 @@ import AppButton from "../components/AppButton";
 import Counter from "../components/Counter";
 import TextButton from "../components/TextButton";
 import { colors } from "../config/config";
+import { updateData } from "../store/storeInAsyncStorage";
 
 export default function EditCartItemModal({
   modalVisible,
   setModalVisible,
   updatedItem,
+  cart,
 }) {
   const { id, order } = updatedItem;
 
@@ -17,28 +19,25 @@ export default function EditCartItemModal({
 
   useEffect(() => {
     setCount(order.quantity);
-    console.log(order.quantity);
   }, []);
 
   function subtractFunc(count) {
-    console.log(count);
     if (count > 1) {
       setCount(count - 1);
     }
   }
   const addFunc = (count) => {
-    console.log(updatedItem);
     setCount(count + 1);
   };
 
   function updateCartItem(modalVisible, item) {
+    const index = cart.findIndex((c) => c.id == item.id);
+    cart[index] = { ...cart[index] };
     setModalVisible(!modalVisible);
-    console.log(item);
   }
 
   function removeCartItem(modalVisible, item) {
     setModalVisible(!modalVisible);
-    console.log(item);
   }
 
   return (
@@ -48,7 +47,7 @@ export default function EditCartItemModal({
         <Text
           style={{
             marginBottom: 14,
-            fontSize: 18,
+            fontSize: 20,
             fontWeight: "bold",
             color: colors.dark,
             textAlign: "center",
@@ -79,7 +78,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     backgroundColor: "black",
     height: "100%",
-    opacity: 0.8,
+    opacity: 0.78,
     width: "100%",
     zIndex: 1,
   },
@@ -98,15 +97,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   btn: {
-    width: "100%",
-    height: 32,
+    width: "90%",
+    height: 36,
     backgroundColor: colors.btnColor,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    marginTop: 20,
   },
   btnTextStyle: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "600",
     color: colors.light,
     textAlign: "center",
