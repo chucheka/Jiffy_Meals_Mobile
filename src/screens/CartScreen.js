@@ -3,12 +3,15 @@ import { View, Text, FlatList, StyleSheet } from "react-native";
 
 import CartItem from "../components/CartItem";
 import AppButton from "../components/AppButton";
+import EditCartItemModal from "./EditCartItemModal";
 
 import { getData } from "../store/storeInAsyncStorage";
 import { colors } from "../config/config";
 
 function CartScreen({ navigation }) {
   const [cart, setCart] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [updatedItem, setUpdatedItem] = useState({});
 
   useEffect(() => {
     async function getCartFromStore() {
@@ -45,7 +48,12 @@ function CartScreen({ navigation }) {
             <FlatList
               data={cart}
               renderItem={({ item, index, separators }) => (
-                <CartItem item={item} />
+                <CartItem
+                  item={item}
+                  modalVisible={modalVisible}
+                  setModalVisible={setModalVisible}
+                  setUpdatedItem={setUpdatedItem}
+                />
               )}
               keyExtractor={(item) => item.id}
             />
@@ -70,16 +78,25 @@ function CartScreen({ navigation }) {
               </Text>
             </View>
           </View>
-          <AppButton
-            title="Place Order"
-            onPressFunc={() =>
-              navigation.navigate("Checkout", {
-                total: total,
-              })
-            }
-            btnStyle={styles.btn}
-            btnTextStyle={styles.btnTextStyle}
-          />
+
+          {modalVisible ? (
+            <EditCartItemModal
+              modalVisible={modalVisible}
+              setModalVisible={setModalVisible}
+              updatedItem={updatedItem}
+            />
+          ) : (
+            <AppButton
+              title="Place Order"
+              onPressFunc={() =>
+                navigation.navigate("Checkout", {
+                  total: total,
+                })
+              }
+              btnStyle={styles.btn}
+              btnTextStyle={styles.btnTextStyle}
+            />
+          )}
         </View>
       )}
     </>
@@ -120,6 +137,25 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: colors.light,
     textAlign: "center",
+  },
+  overlay: {
+    position: "absolute",
+    backgroundColor: "black",
+    height: "100%",
+    opacity: 0.8,
+    width: "100%",
+    zIndex: 1,
+  },
+  editWindow: {
+    width: "100%",
+    height: "40%",
+    bottom: 0,
+    position: "absolute",
+    zIndex: 2,
+    opacity: "0 !important",
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    backgroundColor: colors.white,
   },
 });
 

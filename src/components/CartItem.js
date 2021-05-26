@@ -2,15 +2,21 @@ import React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import { colors } from "../config/config";
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, modalVisible, setModalVisible, setUpdatedItem }) => {
   const { name, price, quantity } = item?.order;
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => {
+        setModalVisible(!modalVisible);
+        setUpdatedItem(item);
+      }}
+    >
       <Text style={styles.quantity}>{quantity}</Text>
       <Text style={styles.name}>{name}</Text>
       <Text style={styles.price}>${price}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -27,6 +33,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     color: colors.dark,
   },
+  price: {
+    textAlign: "center",
+    fontSize: 12,
+    fontWeight: "400",
+  },
   quantity: {
     paddingHorizontal: 2,
     borderColor: colors.dark,
@@ -39,11 +50,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textAlignVertical: "center",
     color: colors.dark,
-  },
-  price: {
-    textAlign: "center",
-    fontSize: 12,
-    fontWeight: "400",
   },
 });
 export default CartItem;
