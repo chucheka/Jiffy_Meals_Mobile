@@ -11,32 +11,49 @@ export default function EditCartItemModal({
   modalVisible,
   setModalVisible,
   updatedItem,
+  setUpdatedItem,
   cart,
 }) {
   const { id, order } = updatedItem;
 
   const [count, setCount] = useState(0);
+  const [price, setPrice] = useState(0);
 
   useEffect(() => {
     setCount(order.quantity);
+    setPrice(order.price);
   }, []);
 
   function subtractFunc(count) {
     if (count > 1) {
       setCount(count - 1);
+      setPrice(price - price / count);
     }
   }
   const addFunc = (count) => {
     setCount(count + 1);
+    setPrice(price + price / count);
   };
 
   function updateCartItem(modalVisible, item) {
     const index = cart.findIndex((c) => c.id == item.id);
-    cart[index] = { ...cart[index] };
+
+    item.order.price = price;
+    item.order.quantity = count;
+
+    cart[index] = item;
+
+    setUpdatedItem(item);
+    // UPDATE CART
+    updateData("@User_Cart", cart);
+    // CLOSE WINDOW
     setModalVisible(!modalVisible);
   }
 
   function removeCartItem(modalVisible, item) {
+    const index = cart.findIndex((c) => c.id == item.id);
+    cart.splice(index, 1);
+    updateData("@User_Cart", cart);
     setModalVisible(!modalVisible);
   }
 

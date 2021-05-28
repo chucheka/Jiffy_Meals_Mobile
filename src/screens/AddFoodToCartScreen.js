@@ -44,7 +44,7 @@ function AddFoodToCartScreen({ navigation, route }) {
     }
   }
   const addToCart = async (order, navigation) => {
-    if (cart) {
+    if (cart != null && cart.length > 0) {
       await storeData("@User_Cart", [
         ...cart,
         {

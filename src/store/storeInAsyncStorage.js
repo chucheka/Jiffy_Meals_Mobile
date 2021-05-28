@@ -38,14 +38,14 @@ export const removeData = async (key) => {
   console.log("Done.");
 };
 
-export const updateData = async (key, newwData) => {
+export const updateData = async (key, newData) => {
   try {
-    await AsyncStorage.mergeItem(key, JSON.stringify(newwData));
-
-    const currentData = await AsyncStorage.getItem(key);
-
-    console.log(currentData);
+    await AsyncStorage.removeItem(key);
+    const currentData = await AsyncStorage.setItem(
+      key,
+      JSON.stringify(newData)
+    );
   } catch (e) {
-    console.log("Error occurred updating  data");
+    console.log("Error occurred updating data");
   }
 };

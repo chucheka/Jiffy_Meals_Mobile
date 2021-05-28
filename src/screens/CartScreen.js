@@ -19,17 +19,17 @@ function CartScreen({ navigation }) {
       setCart(result);
     }
     getCartFromStore();
-  }, []);
-  let total;
+  }, [cart]);
 
-  if (cart) {
+  let total;
+  if (cart != null) {
     total = cart
       .map((item) => item?.order?.price)
       .reduce((sum, current) => sum + current, 0);
   }
   return (
     <>
-      {!cart ? (
+      {!cart || cart.length < 1 ? (
         <View
           style={{
             flex: 1,
@@ -84,6 +84,7 @@ function CartScreen({ navigation }) {
               modalVisible={modalVisible}
               setModalVisible={setModalVisible}
               updatedItem={updatedItem}
+              setUpdatedItem={setUpdatedItem}
               cart={cart}
             />
           ) : (
