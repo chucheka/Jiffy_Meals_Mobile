@@ -53,7 +53,9 @@ export function DrawerContent(props) {
               <FontAwesome5 name="shipping-fast" color={color} size={size} />
             )}
             label="ORDERS"
-            onPress={() => {}}
+            onPress={({}) => {
+              navigation.navigate("Credit Cards");
+            }}
           />
         </Drawer.Section>
         <Drawer.Section title="Account">

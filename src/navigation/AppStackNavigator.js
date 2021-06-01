@@ -11,6 +11,9 @@ import FoodsInACategoryScreen from "../screens/FoodCategoryScreen";
 import SameFoodListScreen from "../screens/SameFoodListScreen";
 import AddFoodToCartScreen from "../screens/AddFoodToCartScreen";
 import CheckoutScreen from "../screens/CheckoutScreen";
+import SelectCardScreen from "../screens/SelectCardScreen";
+import TextButton from "../components/TextButton";
+import { colors } from "../config/config";
 
 const Stack = createStackNavigator();
 
@@ -83,6 +86,41 @@ const AppStackNavigator = (props) => {
       <Stack.Screen name="Checkout" component={CheckoutScreen} />
       <Stack.Screen name="Map" component={RestuarantsMapScreen} />
       <Stack.Screen name="FoodList" component={FoodsInACategoryScreen} />
+      <Stack.Screen
+        name="Credit Cards"
+        component={SelectCardScreen}
+        options={{
+          headerLeft: (props) => (
+            <TextButton
+              label="Cancel"
+              onPressFunc={() => {
+                navigation.goBack();
+              }}
+              textBtnStyle={{ marginLeft: 12 }}
+              textStyle={{
+                color: colors.btnColor,
+                fontSize: 16,
+                fontWeight: "500",
+              }}
+            />
+          ),
+          headerRight: (props) => (
+            <TextButton
+              {...props}
+              label="Edit"
+              onPressFunc={() => {
+                navigation.goBack();
+              }}
+              textBtnStyle={{ marginRight: 12 }}
+              textStyle={{
+                color: colors.btnColor,
+                fontSize: 16,
+                fontWeight: "500",
+              }}
+            />
+          ),
+        }}
+      />
       <Stack.Screen
         name="Add To Cart"
         component={AddFoodToCartScreen}
