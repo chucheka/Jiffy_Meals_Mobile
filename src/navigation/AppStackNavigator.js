@@ -29,7 +29,7 @@ const AppStackNavigator = (props) => {
         },
         headerTitleAlign: "center",
         headerTintColor: "#636363",
-        headerBackTitle: "Home",
+        headerBackTitle: "Back",
         headerBackTitleVisible: true,
         headerBackTitleStyle: {
           color: "#636363",
@@ -90,6 +90,7 @@ const AppStackNavigator = (props) => {
         name="Credit Cards"
         component={SelectCardScreen}
         options={{
+          title: "",
           headerLeft: (props) => (
             <TextButton
               label="Cancel"
